@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class FoodItem extends StatefulWidget {
-  const FoodItem({Key key,
+class FoodTile extends StatefulWidget {
+  const FoodTile({Key key,
     this.name,
     this.onPressed
   }) : super(key: key);
@@ -10,15 +10,12 @@ class FoodItem extends StatefulWidget {
   final ValueChanged<bool> onPressed;
 
   @override
-  State<FoodItem> createState() => new _FoodItemState();
+  State<FoodTile> createState() => new _FoodTileState();
 
 }
 
-class _FoodItemState extends State<FoodItem> {
+class _FoodTileState extends State<FoodTile> {
   bool _isSelected = false;
-
-
-  bool get isSelected => _isSelected;
 
   void _toggleSelection() {
     setState(() {
@@ -31,7 +28,8 @@ class _FoodItemState extends State<FoodItem> {
   Widget build(BuildContext context) {
 
     return new Material(
-        color: _isSelected ? Colors.red[400] : Colors.green[400],
+        color: _isSelected ? new Color.fromARGB(255,231, 76, 60) : new Color.fromARGB(255,26, 188, 156,),
+        elevation: 4.0,
         child: new InkWell(
                 onTap: _toggleSelection,
                 child: container())
@@ -47,15 +45,15 @@ class _FoodItemState extends State<FoodItem> {
             ));
 
   Column content() => new Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          icon(),
+          new Expanded(child: icon()),
           name(),
         ],
       );
 
   Icon icon() => new Icon(
-        Icons.add_shopping_cart,
+        Icons.code,
         color: Colors.white,
         size: 40.0,
       );
