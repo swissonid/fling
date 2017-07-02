@@ -1,3 +1,4 @@
+import 'package:fling/flat_ui_colors.dart';
 import 'package:flutter/material.dart';
 
 class FoodTile extends StatefulWidget {
@@ -30,7 +31,7 @@ class _FoodTileState extends State<FoodTile> {
   Widget build(BuildContext context) {
 
     return new Material(
-        color: _isSelected ? new Color.fromARGB(255,231, 76, 60) : new Color.fromARGB(255,26, 188, 156,),
+        color: _isSelected ? FlatUiColors.alizarin : FlatUiColors.turquoise,
         elevation: 4.0,
         child: new InkWell(
                 onTap: _toggleSelection,
