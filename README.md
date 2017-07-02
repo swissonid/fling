@@ -1,4 +1,6 @@
+
 # fling
+[![Build Status](https://travis-ci.org/swissonid/fling.svg?branch=master)](https://travis-ci.org/swissonid/fling)
 
 A new Flutter project.
 
