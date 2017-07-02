@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 class FoodTile extends StatefulWidget {
   const FoodTile({Key key,
     this.name,
-    this.onPressed
+    this.icon = Icons.code,
+    this.onPressed,
   }) : super(key: key);
 
   final String name;
+  final IconData icon;
   final ValueChanged<bool> onPressed;
 
   @override
@@ -53,7 +55,7 @@ class _FoodTileState extends State<FoodTile> {
       );
 
   Icon icon() => new Icon(
-        Icons.code,
+        widget.icon,
         color: Colors.white,
         size: 40.0,
       );

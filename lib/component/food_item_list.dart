@@ -54,10 +54,17 @@ class _FoodItemListState extends State<FoodItemList> {
     return new GridView.count(
         crossAxisCount: 3,
         padding: const EdgeInsets.all(16.0),
-        mainAxisSpacing: 8.0,
-        crossAxisSpacing: 8.0,
+        mainAxisSpacing: 4.0,
+        crossAxisSpacing: 4.0,
+
         children: widget.foodItems.map((FoodViewModel food){
-            return new FoodTile(name: food.name, onPressed: (bool state) {},);
+            return new FoodTile(
+                name: food.name,
+                icon: food.icon
+                , onPressed: (bool state) {
+                  food.isSelected = state;
+                },
+                );
         }).toList(),
     );
   }
