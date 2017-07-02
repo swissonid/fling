@@ -1,5 +1,6 @@
 import 'package:fling/component/food_item_list.dart';
 import 'package:fling/domain/food.dart';
+import 'package:fling/flat_ui_colors.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -22,9 +23,8 @@ class MyApp extends StatelessWidget {
         // you ran "flutter run", or press Run > Hot Reload App in
         // IntelliJ). Notice that the counter didn't reset back to zero;
         // the application is not restarted.
-
-        primaryColor: new Color.fromARGB(255, 230, 126, 34), //new Color.fromARGB(255,52, 73, 94),
-        scaffoldBackgroundColor: new Color.fromARGB(255, 52, 73, 94) //rgba(52, 73, 94,1.0)
+        primaryColor: FlatUiColors.wet_asphalt,
+        scaffoldBackgroundColor: FlatUiColors.midnight_blue
       ),
       home: new MyHomePage(title: 'Home'),
     );
