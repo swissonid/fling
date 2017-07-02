@@ -118,6 +118,8 @@ pubspec.lock
 # If you don't generate documentation locally you can remove this line.
 doc/api/
 
+coverage/
+
 # End of https://www.gitignore.io/api/dart
 
 # Created by https://www.gitignore.io/api/android
