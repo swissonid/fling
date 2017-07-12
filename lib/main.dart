@@ -1,7 +1,10 @@
-import 'package:fling/component/food_item_list.dart';
+import 'package:fling/component/food_categorie_expansion.dart';
 import 'package:fling/domain/food.dart';
 import 'package:fling/flat_ui_colors.dart';
+import 'package:fling/widget/my_expansion_panel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:meta/meta.dart';
 
 void main() {
   runApp(new MyApp());
@@ -26,13 +29,17 @@ class MyApp extends StatelessWidget {
         primaryColor: FlatUiColors.wet_asphalt,
         scaffoldBackgroundColor: FlatUiColors.midnight_blue
       ),
-      home: new MyHomePage(title: 'Home'),
+      home: new MyHomePage(title: 'Home', fruits: fruits,),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key key,
+    this.title,
+    @required this.fruits
+  }) : super(key: key);
+  final List<FoodViewModel> fruits;
 
   // This widget is the home page of your application. It is stateful,
   // meaning that it has a State object (defined below) that contains
@@ -50,6 +57,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  bool _isEx = false;
+
   @override
   Widget build(BuildContext context) {
 
@@ -67,8 +76,79 @@ class _MyHomePageState extends State<MyHomePage> {
         title: new Text(widget.title),
 
       ),
-      body: new FoodItemList(foodItems: fruits)
+      body: _contend()
+
     );
+  }
+
+
+  Widget _contend() {
+
+    return new SingleChildScrollView(
+        child: new Container(
+          margin: const EdgeInsets.all(16.0),
+
+          child: new MyExpansionPanelList(
+            color: FlatUiColors.wet_asphalt,
+            expansionCallback: (int index, bool isExpended) {
+              setState((){
+                this._isEx = !_isEx;
+              });
+            },
+            children: <MyExpansionPanel>[
+              new MyExpansionPanel(
+                  isExpanded: _isEx,
+                  headerBuilder: _buildExpandHeader,
+                  body: new FoodCategoryExpansionBody(
+                      foodItems: widget.fruits,
+                      onFoodItemTaped: (FoodViewModel food, bool state){},
+                  ),
+              ),
+              new MyExpansionPanel(
+                isExpanded: _isEx,
+                headerBuilder: _buildExpandHeader,
+                body: new FoodCategoryExpansionBody(
+                  foodItems: widget.fruits,
+                  onFoodItemTaped: (FoodViewModel food, bool state){},
+                ),
+              ),
+              new MyExpansionPanel(
+                isExpanded: _isEx,
+                headerBuilder: _buildExpandHeader,
+                body: new FoodCategoryExpansionBody(
+                  foodItems: widget.fruits,
+                  onFoodItemTaped: (FoodViewModel food, bool state){},
+                ),
+              )
+            ],
+          ),
+        ),
+    );
+        /*return new FoodItemList(
+          foodItems: widget.fruits,
+          onFoodItemTaped: (FoodViewModel food, bool state){},
+        );*/
+  }
+
+  Widget _buildExpandHeader(BuildContext context, bool isExpanded){
+    return
+      new Container(
+        child: new Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            new Container(
+                margin: const EdgeInsets.only(left: 6.0),
+                child: new Text(
+                  "Fruits and Vegetables",
+                  style: new TextStyle(
+                    color: Colors.white,
+                    fontSize: 18.0,
+                  ),
+                )
+            )
+          ],
+        )
+      );
   }
 
 

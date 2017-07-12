@@ -1,14 +1,19 @@
 import 'package:fling/component/food_tile.dart';
 import 'package:fling/domain/food.dart';
 import 'package:flutter/material.dart';
+import 'package:meta/meta.dart';
 
+
+typedef void OnFoodItemTaped<FoodItem> (FoodViewModel foodItem, bool selected);
 
 class FoodItemList extends StatefulWidget {
   const FoodItemList({Key key,
-    this.foodItems : const <FoodViewModel>[]
+    @required this.foodItems : const <FoodViewModel>[],
+    @required this.onFoodItemTaped,
   }): super(key: key);
 
   final List<FoodViewModel> foodItems;
+  final OnFoodItemTaped onFoodItemTaped;
   @override
   State<StatefulWidget> createState() => new _FoodItemListState();
 }
@@ -19,6 +24,7 @@ class _FoodItemListState extends State<FoodItemList> {
   Widget build(BuildContext context) {
     return _getContent();
   }
+
 
 
   Widget _getContent() {
@@ -55,6 +61,7 @@ class _FoodItemListState extends State<FoodItemList> {
         crossAxisCount: 3,
         padding: const EdgeInsets.all(16.0),
         mainAxisSpacing: 4.0,
+        shrinkWrap: true,
         crossAxisSpacing: 4.0,
 
         children: widget.foodItems.map((FoodViewModel food){
@@ -63,8 +70,9 @@ class _FoodItemListState extends State<FoodItemList> {
                 icon: food.icon
                 , onPressed: (bool state) {
                   food.isSelected = state;
+                  widget?.onFoodItemTaped(food, state);
                 },
-                );
+            );
         }).toList(),
     );
   }

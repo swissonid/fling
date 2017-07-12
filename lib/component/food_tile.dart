@@ -1,11 +1,12 @@
 import 'package:fling/flat_ui_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:meta/meta.dart';
 
 class FoodTile extends StatefulWidget {
   const FoodTile({Key key,
     this.name,
     this.icon = Icons.code,
-    this.onPressed,
+    @required this.onPressed,
   }) : super(key: key);
 
   final String name;
@@ -40,8 +41,7 @@ class _FoodTileState extends State<FoodTile> {
   }
 
   Container container() => new Container(
-            width: 125.0,
-            height: 125.0,
+            constraints: new BoxConstraints(maxWidth: 125.0, maxHeight: 125.0),
             padding: const EdgeInsets.all(8.0),
             child: new Center(
               child: content(),

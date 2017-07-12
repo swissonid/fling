@@ -39,7 +39,7 @@ void checkTileColor(WidgetTester tester, UniqueKey foodTileKey, Color expecteCol
 void main() {
   testWidgets('Food tile test', (WidgetTester tester) async {
     var foodTileKey = new UniqueKey();
-    var isSeleted = false;
+    var isSelected = false;
 
     // Tells the tester to build a UI based on the widget tree passed to it
     await tester.pumpWidget(
@@ -52,7 +52,7 @@ void main() {
                 name: "hallo",
                 onPressed: (bool newSelectedState) {
                   setState((){
-                    isSeleted = newSelectedState;
+                    isSelected = newSelectedState;
                   });
                 },
               ),
@@ -61,17 +61,17 @@ void main() {
         },
       ),
     );
-    expect(isSeleted, isFalse);
+    expect(isSelected, isFalse);
     checkTileColor(tester, foodTileKey, FlatUiColors.turquoise);
 
     await tester.tap(find.byKey(foodTileKey));
     await tester.pump();
-    expect(isSeleted, isTrue);
+    expect(isSelected, isTrue);
     checkTileColor(tester, foodTileKey, FlatUiColors.alizarin);
 
     await tester.tap(find.byKey(foodTileKey));
     await tester.pump();
-    expect(isSeleted, isFalse);
+    expect(isSelected, isFalse);
     checkTileColor(tester, foodTileKey, FlatUiColors.turquoise);
   });
 }
